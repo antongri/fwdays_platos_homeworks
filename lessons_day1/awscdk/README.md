@@ -136,7 +136,7 @@ cdklocal list
 
 ### **Step 2: Bootstrap the CDK App**
 ```sh
-cdk bootstrap
+cdklocal bootstrap
 ```
 
 ### **Step 3: Check Differences Before Deployment**
