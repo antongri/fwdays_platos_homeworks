@@ -16,7 +16,7 @@ rules:
 - apiGroups:
   - apps.my.domain
   resources:
-  - demoes
+  - demos
   verbs:
   - get
   - list
@@ -24,6 +24,6 @@ rules:
 - apiGroups:
   - apps.my.domain
   resources:
-  - demoes/status
+  - demos/status
   verbs:
   - get

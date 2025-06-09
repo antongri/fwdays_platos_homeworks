@@ -40,6 +40,7 @@ type DemoStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
+//+kubebuilder:resource:path=demos,singular=demo,shortName=demo
 
 // Demo is the Schema for the demos API
 type Demo struct {

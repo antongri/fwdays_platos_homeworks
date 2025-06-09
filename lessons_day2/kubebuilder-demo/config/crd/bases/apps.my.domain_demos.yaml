@@ -4,13 +4,15 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-  name: demoes.apps.my.domain
+  name: demos.apps.my.domain
 spec:
   group: apps.my.domain
   names:
     kind: Demo
     listKind: DemoList
-    plural: demoes
+    plural: demos
+    shortNames:
+    - demo
     singular: demo
   scope: Namespaced
   versions:
