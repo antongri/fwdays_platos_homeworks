@@ -1,0 +1,10 @@
+apiVersion: apps.oleh.v/v1
+kind: Demo
+metadata:
+  labels:
+    app.kubernetes.io/name: hw2-kubebuilder
+    app.kubernetes.io/managed-by: kustomize
+  name: demo-sample
+spec:
+  message: "Hello from Kubebuilder!"
+  replicas: 3

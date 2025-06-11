@@ -1,0 +1,29 @@
+# This rule is not used by the project hw2-kubebuilder itself.
+# It is provided to allow the cluster admin to help manage permissions for users.
+#
+# Grants read-only access to apps.oleh.v resources.
+# This role is intended for users who need visibility into these resources
+# without permissions to modify them. It is ideal for monitoring purposes and limited-access viewing.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: hw2-kubebuilder
+    app.kubernetes.io/managed-by: kustomize
+  name: demo-viewer-role
+rules:
+- apiGroups:
+  - apps.oleh.v
+  resources:
+  - demoes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps.oleh.v
+  resources:
+  - demoes/status
+  verbs:
+  - get
