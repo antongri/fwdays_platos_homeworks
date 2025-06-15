@@ -1,0 +1,11 @@
+apiVersion: apps.my.domain/v1
+kind: Demo
+metadata:
+  labels:
+    app.kubernetes.io/name: shcherbina
+    app.kubernetes.io/managed-by: kustomize
+  name: demo-sample
+spec:
+  replicas: 3
+  message: "ololo"
+
