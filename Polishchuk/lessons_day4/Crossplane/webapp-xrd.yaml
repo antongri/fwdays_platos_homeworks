@@ -1,0 +1,40 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: webapps.example.org
+spec:
+  group: example.org
+  names:
+    kind: WebApp
+    plural: webapps
+  claimNames:
+    kind: WebAppClaim
+    plural: webappclaims
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  properties:
+                    image:
+                      type: string
+                      # Added default value for image parameter
+                      default: "nginx:latest"
+                    replicas:
+                      type: integer
+                      minimum: 1
+                      maximum: 5
+                      # Added default value for replicas parameter
+                      default: 1
+                  required:
+                    # Made parameters required
+                    - image
+                    - replicas

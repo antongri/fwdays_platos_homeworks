@@ -1,0 +1,9 @@
+apiVersion: example.org/v1alpha1
+kind: WebAppClaim
+metadata:
+  name: my-webapp
+  namespace: default
+spec:
+  parameters:
+    image: nginx:latest
+    replicas: 3
