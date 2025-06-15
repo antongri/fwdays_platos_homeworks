@@ -1,0 +1,9 @@
+{
+  "name": "system-info-plugin",
+  "packageManager": "yarn@4.4.1",
+  "main": "src/plugin.ts",
+  "dependencies": {
+    "@backstage/core-components": "^0.17.2",
+    "@backstage/core-plugin-api": "^1.10.7"
+  }
+}
