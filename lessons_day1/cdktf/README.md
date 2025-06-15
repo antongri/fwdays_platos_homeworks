@@ -60,9 +60,13 @@ npm install @cdktf/provider-docker
 ### **Modify `main.ts`**
 Replace the contents with:
 
+<!-- Needed to modify imports for @cdktf/provider-docker v12 -->
 ```typescript
 import { App, TerraformStack } from "cdktf";
-import { DockerProvider, Container, Image, Network } from "@cdktf/provider-docker";
+import { DockerProvider } from "@cdktf/provider-docker/lib/provider";
+import { Container } from "@cdktf/provider-docker/lib/container";
+import { Image } from "@cdktf/provider-docker/lib/image";
+import { Network } from "@cdktf/provider-docker/lib/network";
 import { Construct } from "constructs";
 
 class WordPressStack extends TerraformStack {
@@ -77,6 +81,7 @@ class WordPressStack extends TerraformStack {
 
     const mysqlImage = new Image(this, "mysql-image", {
       name: "mysql:5.7",
+      platform: "linux/amd64", // needed to add for macbook m1
       keepLocally: false,
     });
 
@@ -87,7 +92,7 @@ class WordPressStack extends TerraformStack {
 
     const mysqlContainer = new Container(this, "mysql-container", {
       name: `mysql-${id}`,
-      image: mysqlImage.latest,
+      image: mysqlImage.imageId, // needed to replace mysqlImage.latest to mysqlImage.imageId
       networksAdvanced: [{ name: network.name }],
       env: [
         "MYSQL_ROOT_PASSWORD=rootpass",
@@ -100,10 +105,11 @@ class WordPressStack extends TerraformStack {
 
     new Container(this, "wordpress-container", {
       name: `wordpress-${id}`,
-      image: wordpressImage.latest,
+      image: wordpressImage.imageId, // needed to replace mysqlImage.latest to mysqlImage.imageId
       networksAdvanced: [{ name: network.name }],
+      // won't connect to mysql, since the container name/host name is mysql-${id}
       env: [
-        "WORDPRESS_DB_HOST=mysql",
+        `WORDPRESS_DB_HOST=mysql-${id}`,
         "WORDPRESS_DB_USER=wpuser",
         "WORDPRESS_DB_PASSWORD=wppass",
         "WORDPRESS_DB_NAME=wordpress",
@@ -135,8 +141,10 @@ cdktf synth
 ```
 
 ### **Step 3: Deploy Both Stacks**
+<!-- Error: Usage Error: Found more than one stack, please specify a target stack. Run cdktf destroy <stack> with one of these stacks: StackOne, StackTwo -->
 ```sh
-cdktf deploy --auto-approve
+cdktf deploy StackOne --auto-approve
+cdktf deploy StackTwo --auto-approve
 ```
 
 ---
@@ -156,8 +164,11 @@ Open your browser and navigate to:
 
 ### **3. Destroy the Deployment**
 Once you're done, clean up the environment:
+
+<!-- Error: Usage Error: Found more than one stack, please specify a target stack. Run cdktf destroy <stack> with one of these stacks: StackOne, StackTwo -->
 ```sh
-cdktf destroy --auto-approve
+cdktf destroy StackOne --auto-approve
+cdktf destroy StackTwo --auto-approve
 ```
 
 ---

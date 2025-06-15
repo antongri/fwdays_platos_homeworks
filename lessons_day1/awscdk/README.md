@@ -121,7 +121,7 @@ import * as cdk from 'aws-cdk-lib';
 import { CdkLocalStackDemoStack } from '../lib/cdk-localstack-demo-stack';
 
 const app = new cdk.App();
-new CdkLocalStackDemoStack(app, 'StackOne', { env: { region: 'us-west-2' } });
+new CdkLocalStackDemoStack(app, 'StackOne', { env: { region: 'us-west-1' } }); // won't create a bucket with the same region/name
 new CdkLocalStackDemoStack(app, 'StackTwo', { env: { region: 'us-west-2' } });
 ```
 
@@ -174,5 +174,3 @@ If everything is set up correctly, you should see the created S3 buckets and IAM
 - Submit a short write-up on any challenges faced and how you resolved them.
 
 **Good luck! 🚀**
-
-
