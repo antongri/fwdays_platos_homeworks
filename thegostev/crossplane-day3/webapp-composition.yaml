@@ -1,0 +1,41 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: webapps.example.org
+spec:
+  compositeTypeRef:
+    apiVersion: example.org/v1alpha1
+    kind: WebApp
+  resources:
+    - name: deployment
+      base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: webapp
+                namespace: default  # Add this line
+              spec:
+                replicas: 1
+                selector:
+                  matchLabels:
+                    app: webapp
+                template:
+                  metadata:
+                    labels:
+                      app: webapp
+                  spec:
+                    containers:
+                      - name: webapp
+                        image: nginx:latest
+                        ports:
+                          - containerPort: 80
+      patches:
+        - fromFieldPath: "spec.parameters.replicas"
+          toFieldPath: "spec.forProvider.manifest.spec.replicas"
+        - fromFieldPath: "spec.parameters.image"
+          toFieldPath: "spec.forProvider.manifest.spec.template.spec.containers[0].image"
