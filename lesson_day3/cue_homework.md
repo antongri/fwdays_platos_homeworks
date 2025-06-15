@@ -118,6 +118,12 @@ deployment: #KubernetesDeployment & {
 ### **Step 1: Convert Between Formats**
 Practice converting between formats using these commands:
 
+<!--
+I added all cue files to the directory named cue.
+cue export didn't work until I added `package kubernetes` in each file.
+Then I ran command like the following: `cue export deployment.cue my-deployment.cue --out json`
+-->
+
 ```sh
 # Export to JSON
 cue export deployment.cue --out json
@@ -156,5 +162,3 @@ Create custom validation rules for your Kubernetes resources, such as:
 ---
 
 **Good luck! 🎯**
-
-
