@@ -1,0 +1,25 @@
+package kubernetes
+
+deployment: #KubernetesDeployment & {
+    metadata: {
+        name: "nginx-deployment"
+    }
+    spec: {
+        replicas: 3
+        selector: matchLabels: {
+            app: "nginx"
+        }
+        template: {
+            metadata: labels: {
+                app: "nginx"
+            }
+            spec: containers: [{
+                name:  "nginx"
+                image: "nginx:1.14.2"
+                ports: [{
+                    containerPort: 80
+                }]
+            }]
+        }
+    }
+}
