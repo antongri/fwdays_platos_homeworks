@@ -66,7 +66,7 @@ import (
 type DemoSpec struct {
     // Message is a custom message to be displayed
     Message string `json:"message,omitempty"`
-
+    
     // Replicas is the number of desired replicas
     Replicas int32 `json:"replicas,omitempty"`
 }
@@ -75,7 +75,7 @@ type DemoSpec struct {
 type DemoStatus struct {
     // AvailableReplicas is the number of available replicas
     AvailableReplicas int32 `json:"availableReplicas,omitempty"`
-
+    
     // LastUpdated is the last time the status was updated
     LastUpdated metav1.Time `json:"lastUpdated,omitempty"`
 }
@@ -109,9 +109,6 @@ func init() {
 ### **Step 2: Implement the Controller**
 Modify `controllers/demo_controller.go`:
 
-<!-- package name should controller, not controllers-->
-<!-- need to add metav1 import -->
-
 ```go
 package controllers
 
@@ -139,7 +136,7 @@ type DemoReconciler struct {
 
 func (r *DemoReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
     log := log.FromContext(ctx)
-
+    
     // Fetch the Demo instance
     demo := &appsv1.Demo{}
     if err := r.Get(ctx, req.NamespacedName, demo); err != nil {
@@ -149,7 +146,7 @@ func (r *DemoReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
     // Update status
     demo.Status.AvailableReplicas = demo.Spec.Replicas
     demo.Status.LastUpdated = metav1.Now()
-
+    
     if err := r.Status().Update(ctx, demo); err != nil {
         log.Error(err, "Failed to update Demo status")
         return ctrl.Result{}, err
@@ -203,9 +200,8 @@ kubectl apply -f config/samples/apps_v1_demo.yaml
 ```
 
 ### **Step 5: Verify the Resource**
-<!-- typo, should be `kubectl get demo` not `kubectl get demos` -->
 ```sh
-kubectl get demo
+kubectl get demos
 kubectl describe demo demo-sample
 ```
 
@@ -247,4 +243,4 @@ make undeploy
 make uninstall
 ```
 
-**Good luck! 🚀**
+**Good luck! 🚀** 
