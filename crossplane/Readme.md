@@ -78,6 +78,19 @@ spec:
 
 ### **Step 2: Create Composition**
 Create `webapp-composition.yaml`:
+
+<!--
+FROM TERMINAL:
+
+kubectl apply -f webapp-composition.yaml
+Warning: CustomResourceDefinition.apiextensions.k8s.io "Deployment.apps" not found
+composition.apiextensions.crossplane.io/webapps.example.org created
+
+FROM LENS:
+cannot compose resources: cannot apply composed resource "deployment": cannot create object: an empty namespace may not be set during creation
+cannot compose resources: cannot associate composed resources with Composition resource templates: cannot get composed resource: an empty namespace may not be set when a resource name is provided
+-->
+
 ```yaml
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition

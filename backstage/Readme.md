@@ -29,6 +29,12 @@ cd my-backstage
 ```
 
 #### **3. Start Backstage**
+<!--
+yarn dev - не працює
+Usage Error: Couldn't find a script named "dev".
+
+yarn start - норм
+-->
 ```sh
 yarn install
 yarn dev
@@ -46,6 +52,7 @@ cd system-info-plugin
 ```
 
 ### **Step 2: Initialize Plugin**
+<!-- видає помилку при yarn add @backstage/core-components @backstage/core-plugin-api, дивись скріншот -->
 ```sh
 yarn init -y
 yarn add @backstage/core-components @backstage/core-plugin-api
