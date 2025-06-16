@@ -1,0 +1,3 @@
+encryptionsalt: v1:IKqtPNMCH0g=:v1:3orEbzgC1UcO99jN:0w8B0XXZic1HXdXQdoivGYIK6VpC+A==
+config:
+  pulumi-docker-demo:description: Development environment
